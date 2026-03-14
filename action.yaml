@@ -1,0 +1,9 @@
+name: supriya-project/setup-audio
+description: Setup your GitHub Actions workflow with dummy audio
+author: "@josephine-wolf-oberholtzer"
+branding:
+  icon: package
+  color: white
+runs:
+  main: dist/index.js
+  using: node24

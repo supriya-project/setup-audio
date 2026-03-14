@@ -1,0 +1,36 @@
+{
+  "author": "@josephine-wolf-oberholtzer",
+  "dependencies": {
+    "@actions/exec": "^3.0.0"
+  },
+  "description": "Setup your GitHub Actions workflow with dummy audio",
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.7",
+    "@types/node": "^25.4.0",
+    "esbuild": "^0.27.3",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "keywords": [
+    "actions",
+    "audio",
+    "github",
+    "setup"
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "name": "setup-audio",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/supriya-project/setup-audio.git"
+  },
+  "scripts": {
+    "all": "npm run check && npm run build",
+    "build": "esbuild src/index.ts --bundle --outdir=dist --platform=node --target=node24.0.0 --packages=bundle",
+    "check": "biome check --write"
+  },
+  "version": "1.0.0"
+}
