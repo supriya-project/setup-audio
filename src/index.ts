@@ -1,6 +1,11 @@
 import { spawn } from "node:child_process";
 import * as exec from "@actions/exec";
 
+/**
+ * Run a command in a background process.
+ * actions/exec doesn't support detaching child subprocesses,
+ * so we fall back on Node's process support directly.
+ **/
 async function runInBackground(
   program: string,
   args?: string[],
