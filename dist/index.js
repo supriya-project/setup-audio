@@ -21,6 +21,9 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 
+// src/index.ts
+var import_node_child_process = require("node:child_process");
+
 // node_modules/@actions/exec/lib/toolrunner.js
 var os = __toESM(require("os"), 1);
 var events = __toESM(require("events"), 1);
@@ -737,6 +740,13 @@ function exec(commandLine, args, options) {
 }
 
 // src/index.ts
+async function runInBackground(program, args) {
+  const subprocess = (0, import_node_child_process.spawn)(program, [...args], {
+    detached: true,
+    stdio: "ignore"
+  });
+  subprocess.unref();
+}
 async function run() {
   switch (process.platform) {
     case "linux": {
@@ -749,26 +759,24 @@ async function run() {
         "audio",
         process.env.USER
       ]);
-      await exec("sudo", [
+      await runInBackground("sudo", [
         "-E",
         "su",
         process.env.USER,
         "-c",
-        "jackd -r -ddummy -r44100 -p1024",
-        "&"
+        "jackd -r -ddummy -r44100 -p1024"
       ]);
       await exec("sleep", ["5"]);
       break;
     }
     case "darwin": {
       await exec("brew", ["install", "jack"]);
-      await exec("sudo", [
+      await runInBackground("sudo", [
         "-E",
         "su",
         process.env.USER,
         "-c",
-        "jackd -r -ddummy -r44100 -p1024",
-        "&"
+        "jackd -r -ddummy -r44100 -p1024"
       ]);
       await exec("sleep", ["5"]);
       break;
