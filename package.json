@@ -32,5 +32,5 @@
     "build": "esbuild src/index.ts --bundle --outdir=dist --platform=node --target=node24.0.0 --packages=bundle",
     "check": "biome check --write"
   },
-  "version": "1.0.0"
+  "version": "1.0.1"
 }
